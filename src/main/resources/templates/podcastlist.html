@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Podcastlist</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+	<div style="padding:20px;">
+	<td sec:authorize="hasAuthority('ADMIN')">
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+	</form></td></div>
+		<div style="padding:20px;">
+		<form th:action="@{/login}">
+		<input type="submit" value="Log In" class="btn btn-primary" />
+		</form><div>
+	<div style="color:Navy;padding:20px;">
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]] ! </h3>
+	<h1>Podcasts</h1></div>
+	<table class="table table-striped">
+		<tr>
+			<th>Name</th>
+			<th>Hosts</th>
+			<th>Category</th>
+			<th>Sponsor</th>
+			<th>Platform</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr th:each="podcast : ${podcasts}">
+			<td th:text="${podcast.podcastname}"></td>
+			<td th:text="${podcast.hosts}"></td>
+			<td th:text="${podcast.category.categoryname}"></td>
+			<td th:text="${podcast.sponsor.sponsorname}"></td>
+			<td th:text="${podcast.platform.platformname}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editpodcast{id}(id=${podcast.id})}"
+					class="btn btn-primary">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletepodcast/{id}(id=${podcast.id})}"
+					class="btn btn-danger">Delete</a></td>
+		</tr>
+	</table>
+
+	<tr>
+		<div style="padding:20px;"><td sec:authorize="hasAuthority('ADMIN')"><a href="/addpodcast" class="btn btn-primary">Add A Podcast</a></td></div>
+	</tr>
+</body>
+
+</html>

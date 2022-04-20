@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+	<title>Podcasts</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Edit Podcast</h1>
+	<div>
+		<form th:object="${podcast}" th:action="@{/savepodcast}" action="#" method="post">
+			<label for="podcastid"></label> <input type="hidden" id="podcastid" th:field="*{id}" />
+			<label for="podcastname">Name</label>
+			
+			<input type="text" id="podcastname" th:field="*{podcastname}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="hosts">Hosts</label>
+			<input type="text" id="hosts" th:field="*{hosts}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="category">Category</label>
+			<input type="text" th:field="*{category.categoryname}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="sponsor">Sponsor</label>
+			<input type="text" th:field="*{sponsor.sponsorname}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="platform">Platform</label>
+			<input type="text" th:field="*{platform.platformname}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<input type="submit" value="Save A Podcast" class="btn btn-success"></input>
+			<a href="/podcastlist" class="btn btn-success">Return</a>
+		</form>
+	</div>
+</body>
+
+</html>

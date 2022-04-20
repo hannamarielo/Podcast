@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Add A Podcast</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+
+<body>
+	<h1>Add A Podcast</h1>
+	<div>
+		<form th:object="${podcast}" th:action="@{/savepodcast}" action="#" method="post">
+			<label for="podcastname">Name</label> <input type="text" id="podcastname" th:field="*{podcastname}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="hosts">Hosts</label> <input type="text" id="hosts" th:field="*{hosts}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="category">Choose Category:</label>
+			<select id="category" th:field="*{category}">
+				<option th:each="category: ${categories}" th:value="${category.categoryid}"
+					th:text="${category.categoryname}"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="sponsor">Choose Sponsors:</label>
+			<select id="sponsor" th:field="*{sponsor}">
+				<option th:each="sponsor: ${sponsors}" th:value="${sponsor.sponsorid}"
+					th:text="${sponsor.sponsorname}"></option>
+			</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="platform">Choose Platform:</label>
+			<select id="platform" th:field="*{platform}">
+				<option th:each="platform: ${platforms}" th:value="${platform.platformid}"
+					th:text="${platform.platformname}"></option>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			</select>
+			<div style="clear: both; display: block; height: 20px;"></div>
+			
+			<div style="padding : 10px;">
+			<input type="submit" value="Save" class="btn btn-success"></input>
+			</div>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="padding : 10px;">
+			<a href="/podcastlist" class="btn btn-success">Return</a>
+			</div>
+		</form>
+</body>
+
+</html>
